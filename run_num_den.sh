@@ -13,6 +13,6 @@ cd -
 
 tar xzf input_files.tgz
 
-root -l -b -q "ReweightGJets_QCD.C+(\"$1\",\"num_den\",$3)"
+root -l -b -q "ReweightGJets.C+(\"$1\",\"num_den\",$3)"
 xrdcp fout_num_den_$1.root root://cmseos.fnal.gov//store/user/kreis/reweight_gjets/fout_num_den_$1.root
 

@@ -8,7 +8,7 @@ WhenTOTransferOutput  = ON_EXIT_OR_EVICT
 Notification=never
 notify_user = kreis@fnal.gov
 x509userproxy = $ENV(X509_USER_PROXY)
-Transfer_Input_Files = run_num_den.sh, input_files.tgz, CMSSW_8_0_18_patch1.tar.gz, ReweightGJets_QCD.C
+Transfer_Input_Files = run_num_den.sh, input_files.tgz, CMSSW_8_0_18_patch1.tar.gz, ReweightGJets.C
 
 output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_num_den_GJets40.out
 error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_num_den_GJets40.err
