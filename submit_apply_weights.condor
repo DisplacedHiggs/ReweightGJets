@@ -1,0 +1,133 @@
+universe = vanilla
+Requirements = OpSys == "LINUX" && (Arch != "DUMMY" )
+Executable = run_apply_weights.sh
+Should_Transfer_Files = YES
+request_disk = 10000000
+request_memory = 2100
+WhenTOTransferOutput  = ON_EXIT_OR_EVICT
+Notification=never
+notify_user = kreis@fnal.gov
+x509userproxy = $ENV(X509_USER_PROXY)
+Transfer_Input_Files = run_apply_weights.sh, input_files.tgz, CMSSW_8_0_18_patch1.tar.gz, ReweightGJets_QCD.C, logs/fout_num_den_hadded_QCD.root, logs/fout_num_den_hadded_GJets.root
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets40.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets40.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets40.log
+arguments = GJets40 apply_weights 1 
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets100.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets100.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets100.log
+arguments = GJets100 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets200.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets200.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets200.log
+arguments = GJets200 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets400.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets400.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets400.log
+arguments = GJets400 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets600.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets600.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_GJets600.log
+arguments = GJets600 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD15.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD15.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD15.log
+arguments = QCD15 apply_weights 1
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD30.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD30.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD30.log
+arguments = QCD30 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD50.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD50.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD50.log
+arguments = QCD50 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD80.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD80.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD80.log
+arguments = QCD80 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD120.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD120.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD120.log
+arguments = QCD120 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD170.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD170.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD170.log
+arguments = QCD170 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD300.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD300.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD300.log
+arguments = QCD300 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD470.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD470.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD470.log
+arguments = QCD470 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD600.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD600.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD600.log
+arguments = QCD600 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD800.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD800.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD800.log
+arguments = QCD800 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD1000.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD1000.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD1000.log
+arguments = QCD1000 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD1400.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD1400.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD1400.log
+arguments = QCD1400 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD1800.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD1800.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD1800.log
+arguments = QCD1800 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD2400.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD2400.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD2400.log
+arguments = QCD2400 apply_weights 0
+queue
+
+output = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD3200.out
+error = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD3200.err
+log = /uscms_data/d2/kreis/HiggsDisplaced/ReweightGJets/logs/$(Cluster)_apply_weights_QCD3200.log
+arguments = QCD3200 apply_weights 0
+queue
+
+
