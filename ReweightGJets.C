@@ -306,26 +306,26 @@ double out_VE_min = 0, out_VE_max = 400;
 
 double get_xs(TString gjets_name){
   double xs = 0;
-  if(gjets_name == "GJets40") xs = 20790;
-  else if(gjets_name == "GJets100") xs = 9238;
-  else if(gjets_name == "GJets200") xs = 2305;
-  else if(gjets_name == "GJets400") xs = 274.4;
-  else if(gjets_name == "GJets600") xs = 93.46;
-  else if(gjets_name == "QCD15") xs = 1837410000;
-  else if(gjets_name == "QCD30") xs = 140932000;
-  else if(gjets_name == "QCD50") xs = 19204300;
-  else if(gjets_name == "QCD80") xs = 2762530;
-  else if(gjets_name == "QCD120") xs = 471100;
-  else if(gjets_name == "QCD170") xs = 117276;
-  else if(gjets_name == "QCD300") xs = 7823;
-  else if(gjets_name == "QCD470") xs = 648.2;
-  else if(gjets_name == "QCD600") xs = 186.9;
-  else if(gjets_name == "QCD800") xs = 32.293;
-  else if(gjets_name == "QCD1000") xs = 9.4183;
-  else if(gjets_name == "QCD1400") xs = 0.84265;
-  else if(gjets_name == "QCD1800") xs = 0.114943;
-  else if(gjets_name == "QCD2400") xs = 0.00682981;
-  else if(gjets_name == "QCD3200") xs = 0.000165445;
+  if(gjets_name.Contains("GJets_HT-40To")) xs = 20790;
+  else if(gjets_name.Contains("GJets_HT-100")) xs = 9238;
+  else if(gjets_name.Contains("GJets_HT-200")) xs = 2305;
+  else if(gjets_name.Contains("GJets_HT-400")) xs = 274.4;
+  else if(gjets_name.Contains("GJets_HT-600")) xs = 93.46;
+  else if(gjets_name.Contains("QCD15")) xs = 1837410000;//bentodo
+  else if(gjets_name.Contains("QCD30")) xs = 140932000;
+  else if(gjets_name.Contains("QCD50")) xs = 19204300;
+  else if(gjets_name.Contains("QCD80")) xs = 2762530;
+  else if(gjets_name.Contains("QCD120")) xs = 471100;
+  else if(gjets_name.Contains("QCD170")) xs = 117276;
+  else if(gjets_name.Contains("QCD300")) xs = 7823;
+  else if(gjets_name.Contains("QCD470")) xs = 648.2;
+  else if(gjets_name.Contains("QCD600")) xs = 186.9;
+  else if(gjets_name.Contains("QCD800")) xs = 32.293;
+  else if(gjets_name.Contains("QCD1000")) xs = 9.4183;
+  else if(gjets_name.Contains("QCD1400")) xs = 0.84265;
+  else if(gjets_name.Contains("QCD1800")) xs = 0.114943;
+  else if(gjets_name.Contains("QCD2400")) xs = 0.00682981;
+  else if(gjets_name.Contains("QCD3200")) xs = 0.000165445;
   else cout << "WARNING: Didn't find XS for " << gjets_name << endl;
   return xs;
 }
@@ -358,26 +358,26 @@ TString get_file(TString gjets_name){
 
 double get_count(TString gjets_name){
   TString filename = "ben.root";
-  if(gjets_name == "GJets40") filename = "input_files/histOnly_GJets_HT-40To100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
-  else if(gjets_name == "GJets100") filename = "input_files/histOnly_GJets_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
-  else if(gjets_name == "GJets200") filename = "input_files/histOnly_GJets_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
-  else if(gjets_name == "GJets400") filename = "input_files/histOnly_GJets_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
-  else if(gjets_name == "GJets600") filename = "input_files/histOnly_GJets_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
-  else if(gjets_name == "QCD15") filename = "input_files/histOnly_QCD_Pt_15to30_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD30") filename = "input_files/histOnly_QCD_Pt_30to50_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD50") filename = "input_files/histOnly_QCD_Pt_50to80_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD80") filename = "input_files/histOnly_QCD_Pt_80to120_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD120") filename = "input_files/histOnly_QCD_Pt_120to170_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD170") filename = "input_files/histOnly_QCD_Pt_170to300_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD300") filename = "input_files/histOnly_QCD_Pt_300to470_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD470") filename = "input_files/histOnly_QCD_Pt_470to600_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD600") filename = "input_files/histOnly_QCD_Pt_600to800_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD800") filename = "input_files/histOnly_QCD_Pt_800to1000_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD1000") filename = "input_files/histOnly_QCD_Pt_1000to1400_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD1400") filename = "input_files/histOnly_QCD_Pt_1400to1800_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD1800") filename = "input_files/histOnly_QCD_Pt_1800to2400_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD2400") filename = "input_files/histOnly_QCD_Pt_2400to3200_TuneCUETP8M1_13TeV_pythia8.root";
-  else if(gjets_name == "QCD3200") filename = "input_files/histOnly_QCD_Pt_3200toInf_TuneCUETP8M1_13TeV_pythia8.root";
+  if(gjets_name.Contains("GJets_HT-40To")) filename = "input_files/histOnly_GJets_HT-40To100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  else if(gjets_name.Contains("GJets_HT-100")) filename = "input_files/histOnly_GJets_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  else if(gjets_name.Contains("GJets_HT-200")) filename = "input_files/histOnly_GJets_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  else if(gjets_name.Contains("GJets_HT-400")) filename = "input_files/histOnly_GJets_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  else if(gjets_name.Contains("GJets_HT-600")) filename = "input_files/histOnly_GJets_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  else if(gjets_name.Contains("QCD15")) filename = "input_files/histOnly_QCD_Pt_15to30_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD30")) filename = "input_files/histOnly_QCD_Pt_30to50_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD50")) filename = "input_files/histOnly_QCD_Pt_50to80_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD80")) filename = "input_files/histOnly_QCD_Pt_80to120_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD120")) filename = "input_files/histOnly_QCD_Pt_120to170_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD170")) filename = "input_files/histOnly_QCD_Pt_170to300_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD300")) filename = "input_files/histOnly_QCD_Pt_300to470_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD470")) filename = "input_files/histOnly_QCD_Pt_470to600_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD600")) filename = "input_files/histOnly_QCD_Pt_600to800_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD800")) filename = "input_files/histOnly_QCD_Pt_800to1000_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD1000")) filename = "input_files/histOnly_QCD_Pt_1000to1400_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD1400")) filename = "input_files/histOnly_QCD_Pt_1400to1800_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD1800")) filename = "input_files/histOnly_QCD_Pt_1800to2400_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD2400")) filename = "input_files/histOnly_QCD_Pt_2400to3200_TuneCUETP8M1_13TeV_pythia8.root";
+  else if(gjets_name.Contains("QCD3200")) filename = "input_files/histOnly_QCD_Pt_3200toInf_TuneCUETP8M1_13TeV_pythia8.root";
   else cout << "WARNING: Didn't find filename for " << gjets_name << endl;
 
   TFile* file_gj = TFile::Open(filename);
@@ -633,7 +633,7 @@ void get_num_den(bool add_dy = true, TString gjets_name=""){
 
 
 
-void apply_weights(TString gjets_name = ""){
+void apply_weights(TString path = "", TString gjets_name = ""){
   setup_weights();
 
   //numerator, denominator, and ratio
@@ -685,11 +685,9 @@ void apply_weights(TString gjets_name = ""){
   ///////////////////////
   // Setup TTree
   ///////////////////////
-  TString filename_gj = get_file(gjets_name);
-  TFileCollection fc_gj("dum_gj", "", filename_gj);
-  TChain* tree_gj   = new TChain("treeR");
-  tree_gj->AddFileInfoList((TCollection*)fc_gj.GetList());
-  tree_gj->SetWeight(1.0, "global");
+  TTree* fin = TFile::Open(path+gjets_name);
+  TTree* tree_gj = (TTree*)fin->Get("treeR");
+  tree_gj->SetWeight(1.0);
 
   double xs_gj = get_xs(gjets_name);
   double count_gj = get_count(gjets_name);
@@ -773,13 +771,14 @@ void apply_weights(TString gjets_name = ""){
 
   }
   
+  fin.Close();
 
   ////////////////////
   // Write
   ////////////////////
   cout << "Start writing output" << endl;
 
-  TFile fout("fout_weighted"+gjets_name+".root", "RECREATE"); 
+  TFile fout("fout_weighted_"+gjets_name, "RECREATE"); 
 
   for(unsigned int i=0; i<vec_h_ratio.size(); i++){
     vec_h_ratio.at(i).Write();
@@ -918,7 +917,7 @@ void test_function(TString arg){
   cout << "test function: " << arg << endl;
 }
 
-void ReweightGJets(TString arg, TString step, int addDY){
+void ReweightGJets(TString path, TString filename, TString arg, TString step, int addDY){
   
   //TFile *ftest = TFile::Open(arg+".root","RECREATE");
   //ftest->Close();
@@ -928,7 +927,7 @@ void ReweightGJets(TString arg, TString step, int addDY){
     get_num_den(addDY, arg);
   }
   else if(step == "apply_weights"){
-    apply_weights(arg); //needs weight file from previous step
+    apply_weights(path, filename); //needs weight file from previous step
   }
   
 
