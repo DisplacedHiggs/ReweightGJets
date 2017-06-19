@@ -502,8 +502,8 @@ void get_num_den(bool add_dy = true, TString gjets_name=""){
   TChain* tree_dy = new TChain("treeR");
   tree_dy->AddFileInfoList((TCollection*)fc_dy.GetList());
   //TH1D* h_count_dy = (TH1D*)file_dy->Get("noCutSignature_COUNT");
-  //tree_dy->SetWeight(1/h_count_dy->GetBinContent(1));
-  tree_dy->SetWeight(1.0);
+  //tree_dy->SetWeight(1/h_count_dy->GetBinContent(1), "global");
+  tree_dy->SetWeight(1.0, "global");
 
   cout << "Open GJets" << endl;
   TString filename_gj = get_file(gjets_name);
@@ -513,7 +513,7 @@ void get_num_den(bool add_dy = true, TString gjets_name=""){
   
   double xs_gj = get_xs(gjets_name);
   double count_gj = get_count(gjets_name);
-  tree_gj->SetWeight(xs_gj/count_gj);
+  tree_gj->SetWeight(xs_gj/count_gj, "global");
 
 
   //numerator, denominator, and ratio
@@ -689,7 +689,7 @@ void apply_weights(TString gjets_name = ""){
   TFileCollection fc_gj("dum_gj", "", filename_gj);
   TChain* tree_gj   = new TChain("treeR");
   tree_gj->AddFileInfoList((TCollection*)fc_gj.GetList());
-  tree_gj->SetWeight(1.0);
+  tree_gj->SetWeight(1.0, "global");
 
   double xs_gj = get_xs(gjets_name);
   double count_gj = get_count(gjets_name);
