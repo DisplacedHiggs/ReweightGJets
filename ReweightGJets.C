@@ -311,21 +311,21 @@ double get_xs(TString gjets_name){
   else if(gjets_name.Contains("GJets_HT-200")) xs = 2305;
   else if(gjets_name.Contains("GJets_HT-400")) xs = 274.4;
   else if(gjets_name.Contains("GJets_HT-600")) xs = 93.46;
-  else if(gjets_name.Contains("QCD15")) xs = 1837410000;//bentodo
-  else if(gjets_name.Contains("QCD30")) xs = 140932000;
-  else if(gjets_name.Contains("QCD50")) xs = 19204300;
-  else if(gjets_name.Contains("QCD80")) xs = 2762530;
-  else if(gjets_name.Contains("QCD120")) xs = 471100;
-  else if(gjets_name.Contains("QCD170")) xs = 117276;
-  else if(gjets_name.Contains("QCD300")) xs = 7823;
-  else if(gjets_name.Contains("QCD470")) xs = 648.2;
-  else if(gjets_name.Contains("QCD600")) xs = 186.9;
-  else if(gjets_name.Contains("QCD800")) xs = 32.293;
-  else if(gjets_name.Contains("QCD1000")) xs = 9.4183;
-  else if(gjets_name.Contains("QCD1400")) xs = 0.84265;
-  else if(gjets_name.Contains("QCD1800")) xs = 0.114943;
-  else if(gjets_name.Contains("QCD2400")) xs = 0.00682981;
-  else if(gjets_name.Contains("QCD3200")) xs = 0.000165445;
+  else if(gjets_name.Contains("QCD15_")) xs = 1837410000;//bentodo
+  else if(gjets_name.Contains("QCD30_")) xs = 140932000;
+  else if(gjets_name.Contains("QCD50_")) xs = 19204300;
+  else if(gjets_name.Contains("QCD80_")) xs = 2762530;
+  else if(gjets_name.Contains("QCD120_")) xs = 471100;
+  else if(gjets_name.Contains("QCD170_")) xs = 117276;
+  else if(gjets_name.Contains("QCD300_")) xs = 7823;
+  else if(gjets_name.Contains("QCD470_")) xs = 648.2;
+  else if(gjets_name.Contains("QCD600_")) xs = 186.9;
+  else if(gjets_name.Contains("QCD800_")) xs = 32.293;
+  else if(gjets_name.Contains("QCD1000_")) xs = 9.4183;
+  else if(gjets_name.Contains("QCD1400_")) xs = 0.84265;
+  else if(gjets_name.Contains("QCD1800_")) xs = 0.114943;
+  else if(gjets_name.Contains("QCD2400_")) xs = 0.00682981;
+  else if(gjets_name.Contains("QCD3200_")) xs = 0.000165445;
   else cout << "WARNING: Didn't find XS for " << gjets_name << endl;
   return xs;
 }
@@ -685,7 +685,7 @@ void apply_weights(TString path = "", TString gjets_name = ""){
   ///////////////////////
   // Setup TTree
   ///////////////////////
-  TTree* fin = TFile::Open(path+gjets_name);
+  TFile* fin = TFile::Open(path+gjets_name);
   TTree* tree_gj = (TTree*)fin->Get("treeR");
   tree_gj->SetWeight(1.0);
 
@@ -740,6 +740,7 @@ void apply_weights(TString path = "", TString gjets_name = ""){
 
   cout << "Starting event loop" << endl;
   for(unsigned int i = 0; i<tree_gj->GetEntries(); i++) {
+    if(i==1000) break;//for quick testing
     if(i%10000 == 0) cout << "Event " << i << "/" << tree_gj->GetEntries() << endl;
     tree_gj->GetEntry(i);
 
@@ -771,14 +772,14 @@ void apply_weights(TString path = "", TString gjets_name = ""){
 
   }
   
-  fin.Close();
+  fin->Close();
 
   ////////////////////
   // Write
   ////////////////////
   cout << "Start writing output" << endl;
 
-  TFile fout("fout_weighted_"+gjets_name, "RECREATE"); 
+  TFile fout("fout_weighted_"+gjets_name+".root", "RECREATE"); 
 
   for(unsigned int i=0; i<vec_h_ratio.size(); i++){
     vec_h_ratio.at(i).Write();

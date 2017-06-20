@@ -13,5 +13,11 @@ cd -
 
 tar xzf input_files.tgz
 
-root -l -b -q "ReweightGJets.C+(\"$1\",\"apply_weights\",0)"
-xrdcp fout_weighted$1.root root://cmseos.fnal.gov//store/user/kreis/reweight_gjets/fout_weighted$1.root
+echo "arg0 $0"
+echo "arg1 $1"
+echo "arg2 $2"
+echo "arg3 $3"
+echo "arg4 $4"
+
+root -l -b -q "ReweightGJets.C+(\"$2\",\"$3\",\"unused\",\"apply_weights\",0)"
+xrdcp fout_weighted_$3.root root://cmseos.fnal.gov/$1/fout_weighted_$3.root
