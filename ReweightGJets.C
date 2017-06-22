@@ -740,7 +740,7 @@ void apply_weights(TString path = "", TString gjets_name = ""){
 
   cout << "Starting event loop" << endl;
   for(unsigned int i = 0; i<tree_gj->GetEntries(); i++) {
-    if(i==1000) break;//for quick testing
+
     if(i%10000 == 0) cout << "Event " << i << "/" << tree_gj->GetEntries() << endl;
     tree_gj->GetEntry(i);
 
@@ -812,7 +812,7 @@ void apply_weights(TString path = "", TString gjets_name = ""){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-void make_plots(TString process = "GJets"){
+void make_plots(TString path = "", TString process = "GJets"){
   setup_weights();
 
   ////////////////////////
@@ -821,8 +821,8 @@ void make_plots(TString process = "GJets"){
   TFile* file_gj = 0;
   TFile* file_dy = 0;
   if(process == "GJets"){
-    file_gj = TFile::Open("fout_weighted_hadded_GJets.root", "READ");  
-    file_dy = TFile::Open("fout_num_den_hadded_GJets.root", "READ");
+    file_gj = TFile::Open(path+"/fout_weighted_hadded_GJets.root", "READ");  
+    file_dy = TFile::Open(path+"/fout_num_den_hadded_GJets.root", "READ");
   }
   else if(process == "QCD"){
     file_gj = TFile::Open("fout_weighted_hadded_QCD.root", "READ");  
