@@ -228,9 +228,6 @@ void draw_histos(TH1D* h_gj, TH1D* h_dy, TString variable, TString weight){
 }
 
 
-TString cut_dy = "PTOSSF>10 && ONZ"; 
-//TString cut_dy = "NGOODLEPTONS==1 && MET>45"; 
-TString cut_gj = "NMEDIUMPHOTONS>0 && PT_MEDIUMPHOTONS[0]>10"; //note cuts are written out in loop, too
 
 
 plot_struct weighting1;
@@ -259,7 +256,7 @@ void setup_weights(){
   */
   
   weighting3.name = "NJetsNoPhotons";
-  weighting3.var_dy = "NBASICCALOJETS1PT20";
+  weighting3.var_dy = "NBASICCALOJETS1PT20NOPHOTONS";
   weighting3.var_gj = "NBASICCALOJETS1PT20NOPHOTONS";
   weighting3.nbins = 9;
   weighting3.min = 1;
@@ -306,11 +303,11 @@ double out_VE_min = 0, out_VE_max = 400;
 
 double get_xs(TString gjets_name){
   double xs = 0;
-  if(gjets_name.Contains("GJets_HT-40To")) xs = 20790;
-  else if(gjets_name.Contains("GJets_HT-100")) xs = 9238;
-  else if(gjets_name.Contains("GJets_HT-200")) xs = 2305;
-  else if(gjets_name.Contains("GJets_HT-400")) xs = 274.4;
-  else if(gjets_name.Contains("GJets_HT-600")) xs = 93.46;
+  if(gjets_name == "GJets40" || gjets_name.Contains("GJets_HT-40To")) xs = 20790;
+  else if(gjets_name == "GJets100" || gjets_name.Contains("GJets_HT-100")) xs = 9238;
+  else if(gjets_name == "GJets200" || gjets_name.Contains("GJets_HT-200")) xs = 2305;
+  else if(gjets_name == "GJets400" || gjets_name.Contains("GJets_HT-400")) xs = 274.4;
+  else if(gjets_name == "GJets600" || gjets_name.Contains("GJets_HT-600")) xs = 93.46;
   else if(gjets_name.Contains("QCD15_")) xs = 1837410000;//bentodo
   else if(gjets_name.Contains("QCD30_")) xs = 140932000;
   else if(gjets_name.Contains("QCD50_")) xs = 19204300;
@@ -358,11 +355,11 @@ TString get_file(TString gjets_name){
 
 double get_count(TString gjets_name){
   TString filename = "ben.root";
-  if(gjets_name.Contains("GJets_HT-40To")) filename = "input_files/histOnly_GJets_HT-40To100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
-  else if(gjets_name.Contains("GJets_HT-100")) filename = "input_files/histOnly_GJets_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
-  else if(gjets_name.Contains("GJets_HT-200")) filename = "input_files/histOnly_GJets_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
-  else if(gjets_name.Contains("GJets_HT-400")) filename = "input_files/histOnly_GJets_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
-  else if(gjets_name.Contains("GJets_HT-600")) filename = "input_files/histOnly_GJets_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  if(gjets_name == "GJets40" || gjets_name.Contains("GJets_HT-40To")) filename = "input_files/histOnly_GJets_HT-40To100_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  else if(gjets_name == "GJets100" || gjets_name.Contains("GJets_HT-100")) filename = "input_files/histOnly_GJets_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  else if(gjets_name == "GJets200" || gjets_name.Contains("GJets_HT-200")) filename = "input_files/histOnly_GJets_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  else if(gjets_name == "GJets400" || gjets_name.Contains("GJets_HT-400")) filename = "input_files/histOnly_GJets_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
+  else if(gjets_name == "GJets600" || gjets_name.Contains("GJets_HT-600")) filename = "input_files/histOnly_GJets_HT-600ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.root";
   else if(gjets_name.Contains("QCD15")) filename = "input_files/histOnly_QCD_Pt_15to30_TuneCUETP8M1_13TeV_pythia8.root";
   else if(gjets_name.Contains("QCD30")) filename = "input_files/histOnly_QCD_Pt_30to50_TuneCUETP8M1_13TeV_pythia8.root";
   else if(gjets_name.Contains("QCD50")) filename = "input_files/histOnly_QCD_Pt_50to80_TuneCUETP8M1_13TeV_pythia8.root";
@@ -489,8 +486,14 @@ void check_stitch_GJets(){
 
 
 
-void get_num_den(bool add_dy = true, TString gjets_name=""){
+void get_num_den(bool add_dy = true, TString gjets_name="", double g_pt_cut=10){
   setup_weights();
+
+  TString cut_dy = "PTOSSF>10 && ONZ"; 
+  //TString cut_dy = "NGOODLEPTONS==1 && MET>45"; 
+  TString cut_gj = "NMEDIUMPHOTONS>0 && PT_MEDIUMPHOTONS[0]>";
+  cut_gj+=g_pt_cut; //note cuts are written out in loop, too
+
   
   ///////////////////////////
   // Input and Output Files 
@@ -554,7 +557,7 @@ void get_num_den(bool add_dy = true, TString gjets_name=""){
   
   TH1D h_nTags_dy("h_nTags_dy", "h_nTags_dy", out_nTags_nbins, out_nTags_min, out_nTags_max);
   h_nTags_dy.Sumw2();
-  if(add_dy) tree_dy->Project("h_nTags_dy", "NINCLUSIVETAGGEDCALOJETSE", cut_dy);
+  if(add_dy) tree_dy->Project("h_nTags_dy", "NINCLUSIVETAGGEDCALOJETSENOPHOTONS", cut_dy);
   
   /*
   TH1D h_nJetsNoPhotons_dy("h_nJetsNoPhotons_dy", "h_nJetsNoPhotons_dy", out_nJets_nbins, out_nJets_min, out_nJets_max);
@@ -564,7 +567,7 @@ void get_num_den(bool add_dy = true, TString gjets_name=""){
 
   TH1D h_nJets_dy("h_nJets_dy", "h_nJets_dy", out_nJets_nbins, out_nJets_min, out_nJets_max);
   h_nJets_dy.Sumw2();
-  if(add_dy) tree_dy->Project("h_nJets_dy", "NBASICCALOJETS1PT20", cut_dy);
+  if(add_dy) tree_dy->Project("h_nJets_dy", "NBASICCALOJETS1PT20NOPHOTONS", cut_dy);
 
   /*
   TH1D h_Jet1PTNoPhotons_dy("h_Jet1PTNoPhotons_dy", "h_Jet1PTNoPhotons_dy", out_JetPt_nbins, out_JetPt_min, out_JetPt_max);
@@ -633,7 +636,7 @@ void get_num_den(bool add_dy = true, TString gjets_name=""){
 
 
 
-void apply_weights(TString path = "", TString gjets_name = ""){
+void apply_weights(TString path = "", TString gjets_name = "", double g_pt_cut = 10){
   setup_weights();
 
   //numerator, denominator, and ratio
@@ -745,7 +748,7 @@ void apply_weights(TString path = "", TString gjets_name = ""){
     tree_gj->GetEntry(i);
 
     //if(b_NMEDIUMPHOTONS->at(0)<1) continue;
-    if(b_NMEDIUMPHOTONS->at(0)<1 || b_PT_MEDIUMPHOTONS->at(0)<10) continue;
+    if(b_NMEDIUMPHOTONS->at(0)<1 || b_PT_MEDIUMPHOTONS->at(0)<=g_pt_cut) continue;
     
     double energy = TMath::Sqrt((1+TMath::SinH(b_ETA_MEDIUMPHOTONS->at(0))*TMath::SinH(b_ETA_MEDIUMPHOTONS->at(0)))*b_PT_MEDIUMPHOTONS->at(0)*b_PT_MEDIUMPHOTONS->at(0)); 
 
@@ -918,17 +921,17 @@ void test_function(TString arg){
   cout << "test function: " << arg << endl;
 }
 
-void ReweightGJets(TString path, TString filename, TString arg, TString step, int addDY){
+void ReweightGJets(TString path, TString filename, TString arg, TString step, int addDY, double g_pt_cut){
   
   //TFile *ftest = TFile::Open(arg+".root","RECREATE");
   //ftest->Close();
   //test_function(arg);
   
   if(step == "num_den"){
-    get_num_den(addDY, arg);
+    get_num_den(addDY, arg, g_pt_cut);
   }
   else if(step == "apply_weights"){
-    apply_weights(path, filename); //needs weight file from previous step
+    apply_weights(path, filename, g_pt_cut); //needs weight file from previous step
   }
   
 

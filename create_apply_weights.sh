@@ -2,10 +2,13 @@
 
 MAINDIR=`pwd`
 INPATH=/store/user/lpchbb/kreis/AnalysisTrees_PhotonTest_May11
-OUTPATH=/store/user/kreis/reweight_gjets_test2
-LOGDIR=$MAINDIR/logs
+OUTPATH=/store/user/kreis/reweight_gjets_test2_100
+G_PT_CUT=100
 
-eos root://cmseos.fnal.gov mkdir /store/user/kreis/reweight_gjets_test2
+LOGDIR=$MAINDIR/logs$G_PT_CUT
+
+mkdir $LOGDIR
+eos root://cmseos.fnal.gov mkdir $OUTPATH
 
 condorFile=submit_all.condor
 if [ -e $condorFile ]
@@ -24,7 +27,7 @@ echo "WhenTOTransferOutput  = ON_EXIT_OR_EVICT" >> $condorFile
 echo "Notification=never" >> $condorFile
 echo "notify_user = kreis@fnal.gov" >> $condorFile
 echo "x509userproxy = \$ENV(X509_USER_PROXY)" >> $condorFile
-echo "Transfer_Input_Files = run_apply_weights.sh, input_files.tgz, CMSSW_8_0_18_patch1.tar.gz, ReweightGJets.C, logs/fout_num_den_hadded_QCD.root, logs/fout_num_den_hadded_GJets.root" >> $condorFile
+echo "Transfer_Input_Files = run_apply_weights.sh, input_files.tgz, CMSSW_8_0_18_patch1.tar.gz, ReweightGJets.C, $LOGDIR/fout_num_den_hadded_QCD.root, $LOGDIR/fout_num_den_hadded_GJets.root" >> $condorFile
 echo "" >> $condorFile
 
 processlist=processes.list
@@ -40,7 +43,7 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 	echo "output = $LOGDIR/\$(Cluster)_apply-weights_$filename.out" >> $condorFile
 	echo "error = $LOGDIR/\$(Cluster)_apply-weights_$filename.err" >> $condorFile
 	echo "log = $LOGDIR/\$(Cluster)_apply-weights_$filename.log" >> $condorFile
-	echo "arguments = $OUTPATH root://cmsxrootd.fnal.gov/$INPATH/$line/ $filename apply_weights 1" >> $condorFile
+	echo "arguments = $OUTPATH root://cmsxrootd.fnal.gov/$INPATH/$line/ $filename apply_weights 1 $G_PT_CUT" >> $condorFile
 	echo "queue" >> $condorFile	
 	echo "" >> $condorFile
 

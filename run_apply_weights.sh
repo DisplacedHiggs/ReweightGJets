@@ -18,6 +18,8 @@ echo "arg1 $1"
 echo "arg2 $2"
 echo "arg3 $3"
 echo "arg4 $4"
+echo "arg5 $5"
+echo "arg6 $6"
 
-root -l -b -q "ReweightGJets.C+(\"$2\",\"$3\",\"unused\",\"apply_weights\",0)"
+root -l -b -q "ReweightGJets.C+(\"$2\",\"$3\",\"unused\",\"apply_weights\",0, $6)"
 xrdcp fout_weighted_$3.root root://cmseos.fnal.gov/$1/fout_weighted_$3.root
