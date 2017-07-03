@@ -161,8 +161,8 @@ void draw_histos(TH1D* h_gj, TH1D* h_dy, TString variable, TString weight){
   // Define the ratio plot
   TH1F *h3 = (TH1F*)h_gj->Clone("h3");
   h3->SetLineColor(kBlack);
-  h3->SetMinimum(0);  // Define Y ..
-  h3->SetMaximum(3); // .. range
+  h3->SetMinimum(0.5);  // Define Y ..
+  h3->SetMaximum(1.5); // .. range
   //h3->Sumw2();
   h3->SetStats(0);      // No statistics on lower plot
   h3->Divide(h_dy);
@@ -217,12 +217,14 @@ void draw_histos(TH1D* h_gj, TH1D* h_dy, TString variable, TString weight){
   leg.AddEntry(h_dy, "DY", "L");
   leg.AddEntry(h_gj, "GJets", "L");
   leg.Draw();
+  c.SaveAs("plots/h-"+variable+"_w-"+weight+".png");
   c.SaveAs("plots/h-"+variable+"_w-"+weight+".pdf");
   
 
   pad1->cd();
   gPad->SetLogy();
   gPad->Modified();
+  c.SaveAs("plots/h-"+variable+"_w-"+weight+"_log.png");
   c.SaveAs("plots/h-"+variable+"_w-"+weight+"_log.pdf");
   
 }
